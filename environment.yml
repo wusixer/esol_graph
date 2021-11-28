@@ -1,0 +1,15 @@
+name: esol_graph
+channels:
+  - conda-forge
+  - defaults
+  - dglteam
+dependencies:
+  - pyprojroot
+  - pyjanitor
+  - python=3.8
+  - rdkit
+  - jupyterlab
+  - pytorch==1.6.0
+  - dgl
+  - pyprojroot
+prefix: /Users/jiayicox/opt/anaconda3/envs/esol_graph

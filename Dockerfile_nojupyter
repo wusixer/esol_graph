@@ -1,0 +1,46 @@
+# This is a dockerfile without adding jupyter 
+# author: Jiayi Cox
+
+# Given this is a python project, I chose a simple base image with conda installed
+FROM continuumio/miniconda3
+
+# specify docker workdir - can be path you want, 
+# this will be the working directory for docker
+WORKDIR /home/esol
+
+# copy necessary files from host to docker
+# --chown=docker:docker so that it is not running as a root user
+COPY --chown=docker:docker environment.yml .
+
+#add necessary code to docker, copy the folder from host (local)
+# machine to docker.
+# COPY src_esol . will copy *all files* from src_esol folder to docker workdir
+COPY --chown=docker:docker src_esol src_esol
+COPY --chown=docker:docker notebooks notebooks
+
+# install python env from standard release specified in environment.yml
+RUN conda env create -f environment.yml 
+
+# expose ports
+EXPOSE 8888
+
+# activate the new environment
+SHELL ["conda", "run", "-n", "esol_graph", "/bin/bash", "-c"]
+
+#install customized package, one doesn't need to run python src_esol/setup.py install
+# b/c that gives the same effect of adding customized python package to PYTHONPATH
+# note the ENV is the ENV on docker not on host
+ENV PYTHONPATH /home/esol/src_esol 
+#RUN python src_esol/setup.py install --no need to do this. Use setup.py might install the package to some other location
+
+
+# Demonstrate the environment is activated:
+RUN echo "Make sure standard packages are installed:"
+RUN python -c "import torch"
+RUN echo "Make sure customized funcs are installed:"
+RUN python -c "from esol_graph.esol_data import clean_data"
+
+#run it in the correct conda env, CMD or ENTRYPOINT is needed for a Dockerfile
+CMD ["conda", "run", "--no-capture-output", "-n", "esol_graph"]
+
+
