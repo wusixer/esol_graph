@@ -31,7 +31,7 @@ SHELL ["conda", "run", "-n", "esol_graph", "/bin/bash", "-c"]
 # b/c that gives the same effect of adding customized python package to PYTHONPATH
 # note the ENV is the ENV on docker not on host
 ENV PYTHONPATH /home/esol/src_esol 
-#RUN python src_esol/setup.py install --no need to do this. Use setup.py might install the package to some other location
+#Use setup.py might install the package to some other location
 
 
 # Demonstrate the environment is activated:
