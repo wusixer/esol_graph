@@ -1,7 +1,8 @@
 # Byte-compiled / optimized / DLL files
+data/
 data/*df.csv
 data/*processed.csv
-notebooks/acnn*
+notebooks/
 .DS_Store
 __pycache__/
 *.py[cod]

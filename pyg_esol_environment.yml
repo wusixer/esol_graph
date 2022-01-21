@@ -1,0 +1,14 @@
+name: pyg_esol
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - torchaudio
+  - torchvision
+  - pytorch
+  - rdkit
+  - ipykernel
+  - jupyterlab
+  - pyprojroot
+  - pyjanitor
+prefix: /Users/jiayicox/opt/anaconda3/envs/pyg_esol
